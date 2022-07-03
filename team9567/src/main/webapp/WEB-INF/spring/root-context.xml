@@ -10,7 +10,9 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	
 	<!-- 패키지의 객체를 관리하도록 인식 -->
+	<context:component-scan base-package="org.myapp.domain"/>
 	<context:component-scan base-package="org.myapp.mapper"/>
+	<context:component-scan base-package="org.myapp.service"/>
 	
 	<!-- 스프링에서 관리되는 hikariConfig 객체 -->
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariDataSource">
