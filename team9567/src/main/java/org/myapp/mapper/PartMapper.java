@@ -6,24 +6,24 @@ import org.myapp.domain.PartVO;
 import org.myapp.domain.Criteria;
 
 public interface PartMapper {
-	//품목보기
+	//품목 정보 보기
 	public List<PartVO> getPart();
 	
-	//품목페이지처리
+	//품목 정보 페이지처리
 	public List<PartVO> getPartWithPaging(Criteria cri);
 	
-	//품목등록
+	//품목 정보 등록
 	public void insertSelectKey(PartVO vo);
 	
-	//품목개수
+	//품목 정보 개수
 	public Long count(Criteria cri);
 	
-	//품목삭제
+	//품목 정보 삭제
 	public void delete(Long partCode);
 	
-	//품목개별조회
+	//품목 정보 개별조회
 	public PartVO read(Long partCode);
 	
-	//품목수정
+	//품목 정보 수정
 	public int update(PartVO vo);
 }

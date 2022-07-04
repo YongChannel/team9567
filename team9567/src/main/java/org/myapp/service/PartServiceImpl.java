@@ -14,37 +14,37 @@ import lombok.AllArgsConstructor;
 public class PartServiceImpl implements PartService {
 	private PartMapper partMapper;
 	
-	//품목보기
+	//품목 정보 보기
 	@Override
 	public List<PartVO> getPart(Criteria cri) { 
 		return partMapper.getPartWithPaging(cri);
 	}
 	
-	//품목개수
+	//품목 정보 개수
 	@Override
 	public Long count(Criteria cri) {
 		return partMapper.count(cri);
 	}
 	
-	//품목등록
+	//품목 정보 등록
 	@Override
 	public void register(PartVO vo) {
 		partMapper.insertSelectKey(vo);
 	}
 	
-	//품목삭제
+	//품목 정보 삭제
 	@Override
 	public void remove(Long partCode) {
 		partMapper.delete(partCode);
 	}
 	
-	//품목개별보기
+	//품목 정보 개별보기
 	@Override
 	public PartVO get(Long partCode) {
 		return partMapper.read(partCode);
 	}
 	
-	//품목수정
+	//품목 정보 수정
 	@Override
 	public boolean modify(PartVO vo) {
 		return (partMapper.update(vo) == 1);

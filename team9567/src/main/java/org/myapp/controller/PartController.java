@@ -23,27 +23,27 @@ import lombok.extern.log4j.Log4j;
 public class PartController {
 	private PartService partService;
 	
-	//품목보기
+	//품목 정보 보기
 	@GetMapping("/partList")
 	public void partList(Model model, Criteria cri) {
 		model.addAttribute("list", partService.getPart(cri));
 		model.addAttribute("pageMaker", new PageDTO(cri, partService.count(cri)));
 	}
 	
-	//품목개수
+	//품목 정보 개수
 	@GetMapping("/count")
 	public void count(Criteria cri, Model model) {
 		model.addAttribute("count", partService.count(cri));
 	}
 	
-	//품목등록
+	//품목 정보 등록
 	@PostMapping("/register")
 	public String register(PartVO vo, RedirectAttributes rttr) {
 		partService.register(vo);
 		return "redirect:/part/partList";
 	}
 	
-	//품목삭제
+	//품목 정보 삭제
 	@PostMapping("/remove")
 	public String remove(HttpServletRequest request, Criteria cri) {
 		String[] ajaxMsg = request.getParameterValues("valueArr");
@@ -54,7 +54,7 @@ public class PartController {
 		return "redirect:/part/partList?pageNum="+cri.getPageNum()+"&amount="+cri.getAmount()+"&type="+cri.getType()+"&keyword="+cri.getKeyword();
 	}
 	
-	//품목개별보기
+	//품목 정보 개별보기
 	@GetMapping("/getList")
 	public void getList(Long partCode, Criteria cri, Model model) {
 		model.addAttribute("get", partService.get(partCode));
@@ -62,7 +62,7 @@ public class PartController {
 		model.addAttribute("pageMaker", new PageDTO(cri, partService.count(cri)));
 	}
 	
-	//품목수정
+	//품목 정보 수정
 	@PostMapping("/modify")
 	public String modify(PartVO vo, Criteria cri, RedirectAttributes rttr) {
 		if(partService.modify(vo)) {

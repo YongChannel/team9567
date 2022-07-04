@@ -24,12 +24,12 @@
 	    </where>
 	</sql>
 	
-	<!-- 품목보기 -->
+	<!-- 품목 정보 보기 -->
 	<select id="getPart" resultType="org.myapp.domain.PartVO">
 		<![CDATA[select * from tbl_part where rownum < 11 order by partcode desc]]>
 	</select>
 	
-	<!-- 품목페이지처리 -->
+	<!-- 품목 정보 페이지처리 -->
 	<select id="getPartWithPaging" resultType="org.myapp.domain.PartVO">
 		select partcode, partname, nickname, library, remark, common, drw_no, drw_img
 		from (select rownum rn, partcode, partname, nickname, library, remark, common, drw_no, drw_img
@@ -42,7 +42,7 @@
 		where rn > ((#{pageNum} -1) * #{amount})]]>
 	</select>
 	
-	<!-- 품목등록 -->
+	<!-- 품목 정보 등록 -->
 	<insert id="insertSelectKey">
 		<selectKey keyProperty="PartCode" order="BEFORE" resultType="long">
 			select seq_partcode.nextval from dual
@@ -51,23 +51,24 @@
 		values(#{partCode}, #{partName}, #{nickName}, #{library}, #{remark}, #{common}, #{drw_No, jdbcType=VARCHAR}, #{drw_Img})
 	</insert>
 	
-	<!-- 품목개수 -->
+	<!-- 품목 정보 개수 -->
 	<select id="count" resultType="long">
 		select count(*) from tbl_part
+		
 		<include refid="criteria"></include>
 	</select>
 	
-	<!-- 품목삭제 -->
+	<!-- 품목 정보 삭제 -->
 	<delete id="delete">
 		delete from tbl_part where partcode=#{partCode}
 	</delete>
 	
-	<!-- 품목개별조회 -->
+	<!-- 품목 정보 개별조회 -->
 	<select id="read" resultType="org.myapp.domain.PartVO">
 		select partcode, partname, nickname, library, remark, common, drw_no, drw_img from tbl_part where partcode=#{partCode, jdbcType=VARCHAR}
 	</select>
 	
-	<!-- 품목정보수정 -->
+	<!-- 품목 정보 수정 -->
 	<update id="update">
 		update tbl_part set partname=#{partName}, nickname=#{nickName}, library=#{library}, remark=#{remark}, common=#{common}, drw_no=#{drw_No}, drw_img=#{drw_Img} where partcode=#{partCode}
 	</update>
