@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="org.myapp.mapper.SupportMapper">
+	
+	<!-- 조달계획 조건 검색 -->
+	<sql id="criteria">
+		<where>
+	    	<trim prefixOverrides="OR">
+		    	<foreach item="type" collection="typeArr">
+		    		<trim prefix="OR">
+			    		<choose>
+			    			<when test='type=="C"'>
+			    				supportno like '%'||#{keyword}||'%'
+			    			</when>
+			    			
+			    			<when test='type=="W"'>
+			    				partcode like '%'||#{keyword}||'%'
+			    			</when>
+			    		</choose>
+		    		</trim>
+		    	</foreach>
+	    	</trim>
+	    </where>
+	</sql>
+	
+	<!-- 조달 계획 보기 -->
+	<select id="getSupport" resultType="org.myapp.domain.SupportVO">
+		<![CDATA[select * from tbl_support where rownum < 11 order by supportno desc]]>
+	</select>
+	
+	<!-- 조달 계획 페이지처리 -->
+	<select id="getSupportWithPaging" resultType="org.myapp.domain.SupportVO">
+		select supportno, partcode, requirement, materialprocess, dayschedule, deliverydate
+		from (select rownum rn, supportno, partcode, requirement, materialprocess, dayschedule, deliverydate
+		    from (select * from tbl_support
+		
+		<include refid="criteria"></include>
+		
+		    <![CDATA[order by supportno desc)
+		    	where rownum <= (#{pageNum} * #{amount})) 
+		where rn > ((#{pageNum} -1) * #{amount})]]>
+	</select>
+	
+	<!-- 조달 계획 등록 -->
+	<insert id="insertSelectKey">
+		<selectKey keyProperty="SupportNo" order="BEFORE" resultType="long">
+			select seq_supportno.nextval from dual
+		</selectKey>
+		insert into tbl_support(SupportNo, partcode, requirement, materialprocess, dayschedule, deliverydate)
+		values(#{supportNo}, #{partCode}, #{requirement}, #{materialProcess}, #{daySchedule}, #{deliveryDate})
+	</insert>
+	
+	<!-- 조달 계획 개수 -->
+	<select id="count" resultType="long">
+		select count(*) from tbl_support
+		<include refid="criteria"></include>
+	</select>
+	
+	<!-- 조달 계획 삭제 -->
+	<delete id="delete">
+		delete from tbl_support where supportno=#{supportNo}
+	</delete>
+
+	<!-- 조달 계획 개별조회 -->
+	<select id="read" resultType="org.myapp.domain.SupportVO">
+		select supportno, partcode, materialprocess, dayschedule, requirement, deliverydate from tbl_support where supportno=#{supportNo, jdbcType=VARCHAR}
+	</select>
+	
+	<!-- 조달 계획 수정 -->
+	<update id="update">
+		update tbl_support set partcode=#{partCode}, materialprocess=#{materialProcess}, dayschedule=#{daySchedule}, requirement=#{requirement}, deliverydate=#{deliveryDate} where supportno=#{supportNo}
+	</update>
+
+</mapper>

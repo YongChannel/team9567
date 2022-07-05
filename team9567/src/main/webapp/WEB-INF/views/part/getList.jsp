@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../includes/header.jsp"%>
+
 		<div id="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
@@ -42,7 +43,7 @@
 									onclick="location.href='/part/partList?pageNum=${criteria.pageNum}&amount=${criteria.amount}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}'">취소</button>
 							</div><br><br>
 							
-							<input type="text" name="PartCode" value="${get.partCode}">
+							<input type="hidden" name="PartCode" value="${get.partCode}">
 							<input type="hidden" value="${criteria.pageNum}" name="pageNum">
 							<input type="hidden" value="${criteria.amount}" name="amount">
 							<input type="hidden" value="${criteria.type}" name="type">
@@ -59,10 +60,10 @@
 		                                    <td><input type="text" class="form-control input-sm" name="NickName" value="${get.nickName}"></td>
 		                                    
 		                                    <th class="text-center">품목구분</th>
-		                                    <td><select id="Select2" class="form-control input-sm" name="Library" value="${get.library}">
-		                            				<option value="0">대분류</option>
-		                            				<option value="1">중분류</option>
-		                            				<option value="2">소분류</option>
+		                                    <td><select id="Select2" class="form-control input-sm" name="Library">
+		                            				<option value="0" <c:if test="${get.library == 0}"> selected</c:if>>대분류</option>
+		                            				<option value="1" <c:if test="${get.library == 1}"> selected</c:if>>중분류</option>
+		                            				<option value="2" <c:if test="${get.library == 2}"> selected</c:if>>소분류</option>
 		                        				</select></td>
 		                        			
 		                        			<th class="text-center">품목설명</th>
@@ -71,9 +72,9 @@
 		                                
 										<tr>
 											<th class="text-center">공용여부</th>
-		                                    <td><select id="Select3" class="form-control input-sm" name="Common" value="${get.common}">
-		                            				<option value="0">공용</option>
-		                            				<option value="1">전용</option>
+		                                    <td><select id="Select3" class="form-control input-sm" name="Common">
+		                            				<option value="0" <c:if test="${get.common == 0}"> selected</c:if>>공용</option>
+		                            				<option value="1" <c:if test="${get.common == 1}"> selected</c:if>>전용</option>
 		                        				</select></td>
 											
 		                                    <th class="text-center">도면번호</th>

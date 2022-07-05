@@ -14,7 +14,7 @@ public class Criteria {
 	public Criteria() {
 		
 	}
-
+	
 	//검색에 관련된 정보추가(검색조건 type, 검색어 keyword)
 	private String type;
 	private String keyword;

@@ -71,10 +71,10 @@
                                     <a href="/part/partList">품목 정보 등록 / 조회</a>
                                 </li>
                                 <li>
-                                    <a href="#">조달 계획 등록 / 조회</a>
+                                    <a href="/support/supportList">조달 계획 등록 / 조회</a>
                                 </li>
                                 <li>
-                                    <a href="#">회사 정보 등록 / 조회</a>
+                                    <a href="/company/companyList">회사 정보 등록 / 조회</a>
                                 </li>
                                 <li>
                                     <a href="#">계약 등록 / 조회</a>

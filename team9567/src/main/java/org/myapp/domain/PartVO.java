@@ -15,5 +15,5 @@ public class PartVO {
 	private String Remark; //제품설명
 	private Long Common; //공용여부
 	private Long Drw_No; //도면번호
-	private String Drw_Img; //도면 이미지
+	private String Drw_Img; //도면이미지
 }
