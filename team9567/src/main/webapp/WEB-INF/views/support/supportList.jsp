@@ -178,7 +178,7 @@
 		});
 		
 		function deleteValue() {
-			var url = "/part/remove";
+			var url = "/suppport/remove";
 			var valueArr = new Array();
 			var list = $("input[name='checkRow']");
 			
