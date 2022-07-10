@@ -23,23 +23,27 @@ import lombok.extern.log4j.Log4j;
 public class CompanyController {
 	private CompanyService companyService;
 	
+	//회사 정보 보기
 	@GetMapping("/companyList")
 	public void companyList(Model model, Criteria cri) {
 		model.addAttribute("list", companyService.getCompany(cri));
 		model.addAttribute("pageMaker", new PageDTO(cri, companyService.count(cri)));
 	}
 	
+	//회사 정보 개수
 	@GetMapping("/count")
 	public void count(Criteria cri, Model model) {
 		model.addAttribute("count", companyService.count(cri));
 	}
 	
+	//회사 정보 등록
 	@PostMapping("/register")
 	public String register(CompanyVO vo, RedirectAttributes rttr) {
 		companyService.register(vo);
 		return "redirect:/company/companyList";
 	}
 	
+	//회사 정보 삭제
 	@PostMapping("/remove")
 	public String remove(HttpServletRequest request, Criteria cri) {
 		String[] ajaxMsg = request.getParameterValues("valueArr");
@@ -50,6 +54,7 @@ public class CompanyController {
 		return "redirect:/company/companyList?pageNum="+cri.getPageNum()+"&amount="+cri.getAmount()+"&type="+cri.getType()+"&keyword="+cri.getKeyword();
 	}
 	
+	//회사 정보 개별보기
 	@GetMapping("/getList")
 	public void getList(Long code, Criteria cri, Model model) {
 		model.addAttribute("get", companyService.get(code));
@@ -57,6 +62,7 @@ public class CompanyController {
 		model.addAttribute("pageMaker", new PageDTO(cri, companyService.count(cri)));
 	}
 	
+	//회사 정보 수정
 	@PostMapping("/modify")
 	public String modify(CompanyVO vo, Criteria cri, RedirectAttributes rttr) {
 		if(companyService.modify(vo)) {

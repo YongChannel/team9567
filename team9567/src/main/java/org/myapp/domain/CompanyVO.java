@@ -10,21 +10,21 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CompanyVO {
-	private Long Code;
-	private String Name;
-	private String Business_Number;
-	private String Taxcode;
-	private String Owner;
-	private String Contact;
-	private String Address;
-	private String Account;
-	private String Company_Size;
-	private String Category;
-	private Long Sales;
-	private String Deal_Type;
-	private String Domestic_Foreign;
-	private String Currency;
-	private Date Start_Date;
-	private Date End_Date;
-	private String Invoice_Issue;
+	private Long Code; //업체코드
+	private String Name; //업체명
+	private String Business_Number; //사업자번호
+	private String Taxcode; //세무코드
+	private String Owner; //대표자
+	private String Contact; //연락처
+	private String Address; //주소
+	private String Account; //계좌정보
+	private String Company_Size; //업체규모
+	private String Category; //업태분류
+	private Long Sales; //매출액
+	private String Deal_Type; //거래형태
+	private String Domestic_Foreign; //내외자
+	private String Currency; //결제통화
+	private Date Start_Date; //거래개시일
+	private Date End_Date; //거래종료일
+	private String Invoice_Issue; //계산서발행
 }
