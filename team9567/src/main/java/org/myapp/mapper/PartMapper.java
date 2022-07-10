@@ -5,10 +5,7 @@ import java.util.List;
 import org.myapp.domain.PartVO;
 import org.myapp.domain.Criteria;
 
-public interface PartMapper {
-	//품목 정보 보기
-	public List<PartVO> getPart();
-	
+public interface PartMapper {	
 	//품목 정보 페이지처리
 	public List<PartVO> getPartWithPaging(Criteria cri);
 	

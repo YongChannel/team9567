@@ -21,15 +21,27 @@
 		    		</trim>
 		    	</foreach>
 	    	</trim>
+	    	
+	    		    	
+	    	<trim prefixOverrides="OR">
+		    	<foreach item="ctype" collection="ctypeArr">
+		    		<trim prefix="OR">
+			    		<choose>
+			    			<when test='ctype=="C"'>
+			    				code like '%'||#{ckeyword}||'%'
+			    			</when>
+			    			
+			    			<when test='ctype=="W"'>
+			    				name like '%'||#{ckeyword}||'%'
+			    			</when>
+			    		</choose>
+		    		</trim>
+		    	</foreach>
+	    	</trim>
 	    </where>
 	</sql>
 	
-	<!-- 회사정보보기 -->
-	<select id="getCompany" resultType="org.myapp.domain.CompanyVO">
-		<![CDATA[select * from tbl_company where rownum < 11 order by code desc]]>
-	</select>
-	
-	<!-- 회사정보 페이지처리 -->
+	<!-- 회사 정보 페이지처리 -->
 	<select id="getCompanyWithPaging" resultType="org.myapp.domain.CompanyVO">
 		select code, name, business_number, taxcode, owner, contact, address, account, company_size, category, sales, deal_type, domestic_foreign, currency, start_date, end_date, invoice_issue
 		from (select rownum rn, code, name, business_number, taxcode, owner, contact, address, account, company_size, category, sales, deal_type, domestic_foreign, currency, start_date, end_date, invoice_issue
@@ -42,7 +54,7 @@
 		where rn > ((#{pageNum} -1) * #{amount})]]>
 	</select>
 	
-	<!-- 회사정보등록 -->
+	<!-- 회사 정보 등록 -->
 	<insert id="insertSelectKey">
 		<selectKey keyProperty="Code" order="BEFORE" resultType="long">
 			select seq_code.nextval from dual
@@ -51,23 +63,23 @@
 		values(#{code}, #{name}, #{business_Number}, #{taxcode}, #{owner}, #{contact}, #{address}, #{account}, #{company_Size}, #{category}, #{sales}, #{deal_Type}, #{domestic_Foreign}, #{currency}, #{start_Date}, #{end_Date}, #{invoice_Issue})
 	</insert>
 	
-	<!-- 회사정보개수 -->
+	<!-- 회사 정보 개수 -->
 	<select id="count" resultType="long">
 		select count(*) from tbl_company
 		<include refid="criteria"></include>
 	</select>
 	
-	<!-- 품목삭제 -->
+	<!-- 회사 정보 삭제 -->
 	<delete id="delete">
 		delete from tbl_company where code=#{code}
 	</delete>
 	
-	<!-- 품목 개별조회 -->
+	<!-- 회사 정보 개별조회 -->
 	<select id="read" resultType="org.myapp.domain.CompanyVO">
-		select code, name, business_number, taxcode, owner, contact, address, account, company_size, category, sales, deal_type, domestic_foreign, currency, start_date, end_date, invoice_issue from tbl_company where code=#{code}
+		select code, name, business_number, taxcode, owner, contact, address, account, company_size, category, sales, deal_type, domestic_foreign, currency, start_date, end_date, invoice_issue from tbl_company where code=#{code, jdbcType=VARCHAR}
 	</select>
 	
-	<!-- 품목정보수정 -->
+	<!-- 회사 정보 수정 -->
 	<update id="update">
 		update tbl_company set name=#{name}, business_number=#{business_Number}, taxcode=#{taxcode}, owner=#{owner}, contact=#{contact}, address=#{address}, account=#{account}, company_size=#{company_Size}, category=#{category}, sales=#{sales}, deal_type=#{deal_Type}, domestic_foreign=#{domestic_Foreign}, currency=#{currency}, start_date=#{start_Date}, end_date=#{end_Date}, invoice_issue=#{invoice_Issue} where code=#{code}
 	</update>

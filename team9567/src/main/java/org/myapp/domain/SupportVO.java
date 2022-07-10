@@ -16,4 +16,6 @@ public class SupportVO {
 	private Date DaySchedule; //소요일정
 	private Long Requirement; //소요량
 	private Date DeliveryDate; //조달납기
+	
+	private String PartName; //품목명
 }

@@ -18,7 +18,7 @@
 		                    	<div class="form-group">
 		                    		<select id="Select" class="form-control input-sm" name="type">
 			                            <option ${pageMaker.cri.type == "C"? "selected" : ""} value="C">조달코드</option>
-			                            <option ${pageMaker.cri.type == "W"? "selected" : ""} value="W">품목코드</option>
+			                            <option ${pageMaker.cri.type == "W"? "selected" : ""} value="W">품목명</option>
 		                        	</select>
 		                   		</div>
 	                   		</div>
@@ -96,7 +96,7 @@
 	                                <tr>
 	                                	<th class="text-center"><input type="checkbox"></th>
 	                                	<th class="text-center">조달코드</th>
-	                                    <th class="text-center">품목코드</th>
+	                                    <th class="text-center">품목명</th>
 	                                    <th class="text-center">소요량</th>
 	                                    <th class="text-center">자재소요공정</th>
 	                                    <th class="text-center">소요일정</th>
@@ -111,7 +111,7 @@
 		                                	
 		                                	<td>${support.supportNo}</td>
 		                                	
-		                                    <td><a href="/support/getList?supportNo=${support.supportNo}&pageNum=${pageMaker.cri.pageNum}&amount=${pageMaker.cri.amount}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}">${support.partCode}</a></td>
+		                                    <td><a href="/support/getList?supportNo=${support.supportNo}&pageNum=${pageMaker.cri.pageNum}&amount=${pageMaker.cri.amount}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}">${support.partName}(${support.partCode})</a></td>
 		                                    
 		                                    <td>${support.requirement}</td>
 		                                    

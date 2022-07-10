@@ -5,10 +5,7 @@ import java.util.List;
 import org.myapp.domain.Criteria;
 import org.myapp.domain.SupportVO;
 
-public interface SupportMapper {
-	//조달 계획 보기
-	public List<SupportVO> getSupport();
-	
+public interface SupportMapper {	
 	//조달 계획 페이지처리
 	public List<SupportVO> getSupportWithPaging(Criteria cri);
 	

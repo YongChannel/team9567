@@ -43,7 +43,6 @@
 
 <body>
     <div id="wrapper">
-        <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <a class="navbar-brand" href="/">team967</a>
@@ -77,7 +76,7 @@
                                     <a href="/company/companyList">회사 정보 등록 / 조회</a>
                                 </li>
                                 <li>
-                                    <a href="#">계약 등록 / 조회</a>
+                                    <a href="/contract/contractList">계약 정보 등록 / 조회</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
