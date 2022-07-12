@@ -21,7 +21,6 @@
 		    		</trim>
 		    	</foreach>
 	    	</trim>
-	    	
 	    		    	
 	    	<trim prefixOverrides="OR">
 		    	<foreach item="ctype" collection="ctypeArr">
@@ -83,4 +82,5 @@
 	<update id="update">
 		update tbl_company set name=#{name}, business_number=#{business_Number}, taxcode=#{taxcode}, owner=#{owner}, contact=#{contact}, address=#{address}, account=#{account}, company_size=#{company_Size}, category=#{category}, sales=#{sales}, deal_type=#{deal_Type}, domestic_foreign=#{domestic_Foreign}, currency=#{currency}, start_date=#{start_Date}, end_date=#{end_Date}, invoice_issue=#{invoice_Issue} where code=#{code}
 	</update>
+	
 </mapper>
