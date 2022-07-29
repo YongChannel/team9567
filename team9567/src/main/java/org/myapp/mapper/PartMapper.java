@@ -16,11 +16,14 @@ public interface PartMapper {
 	public Long count(Criteria cri);
 	
 	//품목 정보 삭제
-	public void delete(Long partCode);
+	public void delete(String partCode);
 	
 	//품목 정보 개별조회
-	public PartVO read(Long partCode);
+	public PartVO read(String partCode);
 	
 	//품목 정보 수정
 	public int update(PartVO vo);
+	
+	//품목 정보 개별조회
+	public PartVO getRead(String partName);
 }

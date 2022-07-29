@@ -11,11 +11,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class SupportVO {
 	private Long SupportNo; //조달코드
-	private Long PartCode; //품목코드
+	private String PartCode; //품목코드
 	private String MaterialProcess; //자재소요공정
 	private Date DaySchedule; //소요일정
 	private Long Requirement; //소요량
 	private Date DeliveryDate; //조달납기
-	
+	private Date SupportDate; //등록일
 	private String PartName; //품목명
+	
 }

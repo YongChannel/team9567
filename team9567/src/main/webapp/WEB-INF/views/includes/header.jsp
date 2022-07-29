@@ -45,7 +45,7 @@
     <div id="wrapper">
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
-                <a class="navbar-brand" href="/">team967</a>
+                <a class="navbar-brand" href="/index/board">조달구매시스템</a>
             </div>
             <!-- /.navbar-header -->
 			
@@ -55,7 +55,7 @@
 	           	</li>
 	           	
 				<li>
-	           		<a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+	           		<a href="/index/login"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
 	           	</li>
             </ul>
             <!-- /.navbar-top-links -->
@@ -83,13 +83,13 @@
                         </li>
                         
                       	<li>
-                            <a href="#"><i class="fa fa-table fa-fw"></i><b> 구매발주</b></a>
+                            <a href="/#"><i class="fa fa-table fa-fw"></i><b> 구매발주</b></a>
                         </li>
                         <li>
-                        	<a href="#"><i class="fa fa-wrench fa-fw"></i><b> 자재입고</b></a>
+                        	<a href="/#"><i class="fa fa-wrench fa-fw"></i><b> 자재입고</b></a>
                         </li>
                         <li>
-                        	<a href="#"><i class="fa fa-dashboard fa-fw"></i><b> 자재출고</b></a>
+                        	<a href="/#"><i class="fa fa-dashboard fa-fw"></i><b> 자재출고</b></a>
                         </li>
                     </ul>
                     
