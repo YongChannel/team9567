@@ -5,7 +5,71 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                		<h2 class="page-header"> 조달계획 등록 / 조회</h2>
+                		<h2 class="page-header"> 조달 계획 등록</h2>
+                    </div>
+                </div>
+                <!-- /.row -->      
+                
+                <div class="row">
+                	<div class="col-lg-12">
+                		<form action="/support/supportList" method="get">
+	                    	<div class="col-lg-1">
+		                    	<div class="form-group">
+		                    		<select id="Select1" class="form-control input-sm" name="ptype">
+			                            <option ${pageMaker.cri.ptype == "W"? "selected" : ""} value="W">품목명</option>
+		                        	</select>
+		                   		</div>
+	                   		</div>
+	                   		
+	                   		<div class="col-lg-2">
+	                   			<div class="form-group">
+									<input type="text" class="form-control input-sm" name="pkeyword" value="${pageMaker.cri.pkeyword}">
+								</div>
+							</div>
+	                   		<button class="btn btn-default btn-sm" type="submit"><i class="fa fa-search"></i></button>
+	                   	</form>
+                	
+						<form action="/support/register" method="post">
+							<div class="col-lg-2" style="float:right">
+								<button type="submit" class="btn btn-success">등록</button>
+								<button type="button" class="btn btn-warning" style="float:right" onclick="deleteValue();">삭제</button>
+							</div><br><br>
+							
+							<div class="table-responsive" style="width:100%">
+		                        <table class="table table-bordered table-hover table-striped">
+		                        	<tbody>
+		                                <tr>
+		                                    <th class="text-center" style="width:10%">품목코드</th>
+		                                    <td><input type="text" class="form-control input-sm" name="PartCode" value="${getReg.partCode}" readonly></td>
+		                                    
+		                                    <th class="text-center" style="width:10%">소요량</th>
+		                                    <td><input type="text" class="form-control input-sm" name="Requirement"></td>
+		                                    
+		                                    <th class="text-center" style="width:10%">자재소요공정</th>
+		                                    <td><input type="text" class="form-control input-sm" name="MaterialProcess"></td>
+		                                </tr>
+		                                
+										<tr>
+											<th class="text-center" style="width:10%">소요일정</th>
+											<td><input type="date" class="form-control input-sm" name="DaySchedule"></td>
+											
+		                                    <th class="text-center" style="width:10%">조달납기</th>
+		                                    <td><input type="date" class="form-control input-sm" name="DeliveryDate"></td>
+		                                    
+		                                    <td colspan="2"></td>
+		                                </tr>
+		                            </tbody>
+		                        </table>
+		                    </div>
+		                    <!-- /.table-responsive -->
+						</form>
+					</div>
+				</div>
+                <!-- /.row -->
+               
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h3 class="page-header">조달 계획 리스트</h3>
                     </div>
                 </div>
                 <!-- /.row -->
@@ -15,7 +79,7 @@
                 		<form action="/support/supportList" method="get">
 	                    	<div class="col-lg-2">
 		                    	<div class="form-group">
-		                    		<select id="Select" class="form-control input-sm" name="type">
+		                    		<select id="Select2" class="form-control input-sm" name="type">
 			                            <option ${pageMaker.cri.type == "C"? "selected" : ""} value="C">조달코드</option>
 			                            <option ${pageMaker.cri.type == "W"? "selected" : ""} value="W">품목명</option>
 		                        	</select>
@@ -34,65 +98,18 @@
                 <!-- /.row -->
                 
                 <div class="row">
-                	<div class="col-lg-12">
-						<form action="/support/register" method="post">
-							<div class="col-lg-2" style="float:right">
-								<button type="submit" class="btn btn-success">등록</button>
-								<button type="button" class="btn btn-warning" style="float:right" onclick="deleteValue();">삭제</button>
-							</div><br><br>
-							
-							<div class="table-responsive" style="width:100%">
-		                        <table class="table table-bordered table-hover table-striped">
-		                        	<tbody>
-		                                <tr>
-		                                    <th class="text-center">품목코드</th>
-		                                    <td><input type="text" class="form-control input-sm" name="PartCode"></td>
-		                                    
-		                                    <th class="text-center">소요량</th>
-		                                    <td><input type="text" class="form-control input-sm" name="Requirement"></td>
-		                                    
-		                                    <th class="text-center">자재소요공정</th>
-		                                    <td><input type="text" class="form-control input-sm" name="MaterialProcess"></td>
-		                                </tr>
-		                                
-										<tr>
-											<th class="text-center">소요일정</th>
-											<td><input type="date" class="form-control input-sm" name="DaySchedule"></td>
-											
-		                                    <th class="text-center">조달납기</th>
-		                                    <td><input type="date" class="form-control input-sm" name="DeliveryDate"></td>
-		                                    
-		                                    <td colspan="2"></td>
-		                                </tr>
-		                            </tbody>
-		                        </table>
-		                    </div>
-		                    <!-- /.table-responsive -->
-						</form>
-					</div>
-				</div>
-                <!-- /.row -->
-               
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h3 class="page-header">조달계획 리스트</h3>
-                    </div>
-                </div>
-                <!-- /.row -->
-                
-                <div class="row">
 	                <div class="col-lg-12">
 	                    <div class="table-responsive">
 	                        <table class="table table-striped table-bordered table-hover" id="dataTables-example">
 	                        	<thead>
 	                                <tr>
-	                                	<th class="text-center"><input type="checkbox" name="checkAll" id="checkAll"></th>
-	                                	<th class="text-center">조달코드</th>
-	                                    <th class="text-center">품목명</th>
-	                                    <th class="text-center">소요량</th>
-	                                    <th class="text-center">자재소요공정</th>
-	                                    <th class="text-center">소요일정</th>
-	                                    <th class="text-center">조달납기</th>
+	                                	<th class="text-center" style="width:5%"><input type="checkbox" name="checkAll" id="checkAll"></th>
+	                                	<th class="text-center" style="width:10%">조달코드</th>
+	                                    <th class="text-center" style="width:15%">품목명</th>
+	                                    <th class="text-center" style="width:15%">소요량</th>
+	                                    <th class="text-center" style="width:25%">자재소요공정</th>
+	                                    <th class="text-center" style="width:15%">소요일정</th>
+	                                    <th class="text-center" style="width:15%">조달납기</th>
 	                                </tr>
 	                            </thead>
 	                            
@@ -102,7 +119,7 @@
 		                                	<td class="text-center"><input type="checkbox" name="checkRow" value="${support.supportNo}"></td>
 		                                	
 		                                	<td>${support.supportNo}</td>
-		                                	
+		                                    
 		                                    <td><a href="/support/getList?supportNo=${support.supportNo}&pageNum=${pageMaker.cri.pageNum}&amount=${pageMaker.cri.amount}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}">${support.partName}(${support.partCode})</a></td>
 		                                    
 		                                    <td>${support.requirement}</td>

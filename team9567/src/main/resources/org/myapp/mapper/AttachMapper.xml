@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="org.myapp.mapper.AttachMapper">
+	<!-- 첨부파일 등록 -->
+	<insert id="insert">
+		<selectKey keyProperty="Drw_No" order="BEFORE" resultType="long">
+			select ${partCode}.currval from dual
+		</selectKey>
+		insert into tbl_attach (uuid, uploadpath, filename, partcode)
+		values (#{uuid}, #{uploadPath}, #{fileName}, #{partCode}||#{drw_No})
+	</insert>
+	
+	<!-- 첨부파일 수정 -->
+	<update id="update">
+		<selectKey keyProperty="Drw_No" order="BEFORE" resultType="long">
+			select ${library}${librarym}.currval from dual
+		</selectKey>
+		update tbl_attach set partcode=(#{library}||#{librarym}||#{drw_No}) where partcode=#{partCode}
+	</update>
+	
+	<!-- 첨부파일 조회 -->
+	<select id="findByPartCode" resultType="org.myapp.domain.AttachFileDTO">
+		select * from tbl_attach where partcode = #{partCode}
+	</select>
+	
+</mapper>

@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.myapp.domain.Criteria;
 import org.myapp.domain.PageDTO;
 import org.myapp.domain.SupportVO;
+import org.myapp.service.PartService;
 import org.myapp.service.SupportService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,11 +23,13 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class SupportController {
 	private SupportService supportService;
+	private PartService partService;
 	
 	//조달 계획 보기
 	@GetMapping("/supportList")
-	public void supportList(Model model, Criteria cri) {
+	public void supportList(String pkeyword, Model model, Criteria cri) {
 		model.addAttribute("list", supportService.getSupport(cri));
+		model.addAttribute("getReg", partService.getRead(pkeyword));
 		model.addAttribute("pageMaker", new PageDTO(cri, supportService.count(cri)));
 	}
 	
@@ -47,10 +50,12 @@ public class SupportController {
 	@PostMapping("/remove")
 	public String remove(HttpServletRequest request, Criteria cri) {
 		String[] ajaxMsg = request.getParameterValues("valueArr");
+		
 		int size = ajaxMsg.length;
 		for(int i = 0; i < size; i++) {
 			supportService.remove(Long.parseLong(ajaxMsg[i]));
 		}
+		
 		return "redirect:/support/supportList?pageNum="+cri.getPageNum()+"&amount="+cri.getAmount()+"&type="+cri.getType()+"&keyword="+cri.getKeyword();
 	}
 	
@@ -68,6 +73,7 @@ public class SupportController {
 		if(supportService.modify(vo)) {
 			rttr.addFlashAttribute("state", "modify");
 		}
+		
 		return "redirect:/support/supportList?pageNum="+cri.getPageNum()+"&amount="+cri.getAmount()+"&type="+cri.getType()+"&keyword="+cri.getKeyword();
 	}
 }

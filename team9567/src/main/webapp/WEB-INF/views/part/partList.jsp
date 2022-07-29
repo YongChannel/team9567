@@ -1,41 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../includes/header.jsp"%>
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                		<h2 class="page-header"> 품목 정보 등록 / 조회</h2>
+                		<h2 class="page-header"> 품목 정보 등록</h2>
                     </div>
                 </div>
                 <!-- /.row -->
                 
                 <div class="row">
-                	<div class="col-lg-6">
-                		<form action="/part/partList" method="get">
-	                    	<div class="col-lg-2">
-		                    	<div class="form-group">
-		                    		<select id="Select" class="form-control input-sm" name="type">
-			                            <option ${pageMaker.cri.type == "C"? "selected" : ""} value="C">품목코드</option>
-			                            <option ${pageMaker.cri.type == "W"? "selected" : ""} value="W">품목명</option>
-		                        	</select>
-		                   		</div>
-	                   		</div>
-	                   		
-	                   		<div class="col-lg-4">
-	                   			<div class="form-group">
-									<input type="text" class="form-control input-sm" name="keyword" value="${pageMaker.cri.keyword}">
-								</div>
-							</div>
-	                   		<button class="btn btn-default btn-sm" type="submit"><i class="fa fa-search"></i></button>
-	                   	</form>
-                   	</div>
-                </div>
-                <!-- /.row -->
-                
-                <div class="row">
                 	<div class="col-lg-12">
-						<form action="/part/register" method="post">
+						<form action="/part/register" method="post" enctype="multipart/form-data">
 							<div class="col-lg-2" style="float:right">
 								<button type="submit" class="btn btn-success">등록</button>
 								<button type="button" class="btn btn-warning" style="float:right" onclick="deleteValue();">삭제</button>
@@ -45,37 +23,46 @@
 		                        <table class="table table-bordered table-hover table-striped">
 		                        	<tbody>
 		                                <tr>
-		                                    <th class="text-center">품목명</th>
-		                                    <td><input type="text" class="form-control input-sm" name="PartName" ></td>
+		                                    <th class="text-center" style="width:10%">품목명</th>
+		                                    <td style="width:15%"><input type="text" class="form-control input-sm" name="PartName" ></td>
 		                                    
-		                                    <th class="text-center">약칭</th>
-		                                    <td><input type="text" class="form-control input-sm" name="NickName"></td>
+		                                    <th class="text-center" style="width:10%">약칭</th>
+		                                    <td style="width:15%"><input type="text" class="form-control input-sm" name="NickName"></td>
 		                                    
-		                                    <th class="text-center">품목구분</th>
-		                                    <td><select id="Select2" class="form-control input-sm" name="Library">
-		                            				<option value="0">대분류</option>
-		                            				<option value="1">중분류</option>
-		                            				<option value="2">소분류</option>
+		                                    <th class="text-center" style="width:10%">대분류</th>
+		                                    <td style="width:15%"><select id="Select1" class="form-control input-sm" name="Library" onchange="categoryChange(this)">
+		                                    		<option>선택해주세요.</option>
+		                            				<option value="A">장착부</option>
+		                            				<option value="B">정렬부</option>
+		                            				<option value="C">제어부</option>
+		                            				<option value="D">주입부</option>
+		                            				<option value="E">취출부</option>
+		                            				<option value="F">투입부</option>
 		                        				</select></td>
-		                        			
-		                        			<th class="text-center">품목설명</th>
-		                                    <td><input type="text" class="form-control input-sm" name="Remark"></td>
+		                        				
+		                        			<th class="text-center" style="width:10%">중분류</th>
+		                                    <td style="width:15%"><select id="Select2" class="form-control input-sm" name="Librarym">
+	                                    			<option>선택해주세요.</option>
+		                        				</select></td>
+		                        				
 		                                </tr>
 		                                
 										<tr>
-											<th class="text-center">공용여부</th>
-		                                    <td><select id="Select3" class="form-control input-sm" name="Common">
+											<th class="text-center" style="width:10%">품목설명</th>
+		                                    <td style="width:15%"><input type="text" class="form-control input-sm" name="Remark"></td>
+											
+											<th class="text-center" style="width:10%">공용여부</th>
+		                                    <td style="width:15%"><select id="Select3" class="form-control input-sm" name="Common">
+		                                    		<option>선택해주세요.</option>
 		                            				<option value="0">공용</option>
 		                            				<option value="1">전용</option>
 		                        				</select></td>
-											
-		                                    <th class="text-center">도면번호</th>
-		                                    <td><input type="text" class="form-control input-sm" name="Drw_No"></td>
 		                                    
-		                                    <th class="text-center">도면 IMG</th>
-		                                    <td><input type="text" name="Drw_Img"></td>
+		                                    <th class="text-center" style="width:10%">도면 IMG</th>
+		                                    <td style="width:15%"><input type="file" name="Drw_Img" multiple></td>
 		                                    
 		                                    <td colspan="2"></td>
+		                                    
 		                                </tr>
 		                            </tbody>
 		                        </table>
@@ -94,20 +81,43 @@
                 <!-- /.row -->
                 
                 <div class="row">
+                	<div class="col-lg-6">
+                		<form action="/part/partList" method="get">
+	                    	<div class="col-lg-2">
+		                    	<div class="form-group">
+		                    		<select id="Select4" class="form-control input-sm" name="type">
+			                            <option ${pageMaker.cri.type == "C"? "selected" : ""} value="C">품목코드</option>
+			                            <option ${pageMaker.cri.type == "W"? "selected" : ""} value="W">품목명</option>
+		                        	</select>
+		                   		</div>
+	                   		</div>
+	                   		
+	                   		<div class="col-lg-4">
+	                   			<div class="form-group">
+									<input type="text" class="form-control input-sm" name="keyword" value="${pageMaker.cri.keyword}">
+								</div>
+							</div>
+	                   		<button class="btn btn-default btn-sm" type="submit"><i class="fa fa-search"></i></button>
+	                   	</form>
+                   	</div>
+                </div>
+                <!-- /.row -->
+                
+                <div class="row">
 	                <div class="col-lg-12">
 	                    <div class="table-responsive">
 	                        <table class="table table-striped table-bordered table-hover" id="dataTables-example">
 	                        	<thead>
 	                                <tr>
-	                                	<th class="text-center"><input type="checkbox" name="checkAll" id="checkAll"></th>
-	                                	<th class="text-center">품목코드</th>
-	                                    <th class="text-center">품목명</th>
-	                                    <th class="text-center">약칭</th>
-	                                    <th class="text-center">품목구분</th>
-	                                    <th class="text-center">품목설명</th>
-	                                    <th class="text-center">공용여부</th>
-	                                    <th class="text-center">도면번호</th>
-	                                    <th class="text-center">도면 IMG</th>
+	                                	<th class="text-center" style="width:5%"><input type="checkbox" name="checkAll" id="checkAll"></th>
+	                                	<th class="text-center" style="width:10%">품목코드</th>
+	                                    <th class="text-center" style="width:10%">품목명</th>
+	                                    <th class="text-center" style="width:10%">약칭</th>
+	                                    <th class="text-center" style="width:10%">대분류</th>
+	                                    <th class="text-center" style="width:10%">중분류</th>
+	                                    <th class="text-center" style="width:15%">품목설명</th>
+	                                    <th class="text-center" style="width:10%">공용여부</th>
+	                                    <th class="text-center" style="width:15%">도면 IMG</th>
 	                                </tr>
 	                            </thead>
 	                            
@@ -121,32 +131,66 @@
 		                                    <td><a href="/part/getList?partCode=${part.partCode}&pageNum=${pageMaker.cri.pageNum}&amount=${pageMaker.cri.amount}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}">${part.partName}</a></td>
 		                                    
 		                                    <td>${part.nickName}</td>
+		                                  	
+		                                    <td><c:if test="${part.library == 'A'}">
+		                                    		장착부
+		                                    	</c:if>
+		                                    	<c:if test="${part.library == 'B'}">
+		                                    		정렬부
+		                                    	</c:if>
+		                                    	<c:if test="${part.library == 'C'}">
+		                                    		제어부
+		                                    	</c:if>                                    	
+		                                    	<c:if test="${part.library == 'D'}">
+		                                    		주입부
+		                                    	</c:if>                                    	
+		                                    	<c:if test="${part.library == 'E'}">
+		                                    		취출부
+		                                    	</c:if>                                    	
+		                                    	<c:if test="${part.library == 'F'}">
+		                                    		투입부
+		                                    	</c:if></td>
 		                                    
-		                                    <td><c:if test="${part.library == 0}">
-		                                    		대분류
+		                                    <td><c:if test="${part.library == 'A' and part.librarym == 'A'}">
+		                                    		감지기
+		                                    	</c:if>
+		                                    	<c:if test="${part.library == 'A' and part.librarym == 'B'}">
+		                                    		고정대
 		                                    	</c:if>
 		                                    	
-		                                    	<c:if test="${part.library == 1}">
-		                                    		중분류
+		                                    	<c:if test="${part.library == 'B' and part.librarym == 'A'}">
+		                                    		투영기
 		                                    	</c:if>
 		                                    	
-		                                    	<c:if test="${part.library == 2}">
-		                                    		소분류
+		                                 		<c:if test="${part.library == 'C' and part.librarym == 'A'}">
+		                                    		제어판 이슈
+		                                    	</c:if>
+		                                    	
+		                                    	<c:if test="${part.library == 'D' and part.librarym == 'A'}">
+		                                    		여과장치
+		                                    	</c:if>
+		                                    	
+		                                    	<c:if test="${part.library == 'E' and part.librarym == 'A'}">
+		                                    		이동 컨베이어
+		                                    	</c:if>
+		                                    	
+		                                    	<c:if test="${part.library == 'F' and part.librarym == 'A'}">
+		                                    		구동축
+		                                    	</c:if>
+		                                    	<c:if test="${part.library == 'F' and part.librarym == 'B'}">
+		                                    		커넥터
 		                                    	</c:if></td>
 		                                    	
-		                                    <td>${part.remark}</td>
+											<td>${part.remark}</td>
 		                                    
 		                                    <td><c:if test="${part.common == 0}">
 		                                    		공용
 		                                    	</c:if>
-		                                    	
 		                                   		<c:if test="${part.common == 1}">
 		                                    		전용
 		                                    	</c:if></td>
 		                                    
-		                                    <td>${part.drw_No}</td>
-		                                    
-		                                    <td>${part.drw_Img}</td>
+		                                    <td><a href="/download?uploadPath=${fn:replace(part.uploadPath, '\\', '-')}&uuid=${part.uuid}&fileName=${part.fileName}">${part.fileName}</a></td>
 		                                </tr>
 		                            </c:forEach>
 	                         	</tbody>
@@ -189,6 +233,38 @@
         <!-- /#page-wrapper -->
     </div>
     <!-- /#wrapper -->
+	
+	
+	<!-- 보전관련 설비명 유형-->
+	<script>
+		function categoryChange(e) {
+			var AA = ["감지기", "고정대"];
+			var BB = ["투영기"];
+			var CC = ["제어판 이슈"];
+			var DD = ["여과장치"];
+			var EE = ["이동 컨베이어"];
+			var FF = ["구동축", "커넥터"];
+			var target = document.getElementById("Select2");
+			
+			if(e.value == "A") var el = AA;
+			else if(e.value == "B") var el = BB;
+			else if(e.value == "C") var el = CC;
+			else if(e.value == "D") var el = DD;
+			else if(e.value == "E") var el = EE;
+			else if(e.value == "F") var el = FF;
+			
+			target.options.length = 0;
+			
+			for (x in el) {
+				var opt = document.createElement("option");
+				opt.value = (x == 0) ? "A" : "B";
+				opt.innerHTML = el[x];
+				target.appendChild(opt);
+				
+			}
+		}
+	</script>
+	
 	
 	<!-- 선택 품목 삭제 -->
 	<script type="text/javascript">

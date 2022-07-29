@@ -22,6 +22,9 @@ public class Criteria {
 	private String ctype;
 	private String ckeyword;
 	
+	private String ptype;
+	private String pkeyword;
+	
 	//여러 검색 조건인 문자열을 분리해서 문자열 배열로 만들기
 	public String[] getTypeArr() {
 		return type==null? new String[] {} : type.split("");
@@ -29,5 +32,9 @@ public class Criteria {
 	
 	public String[] getCtypeArr() {
 		return ctype==null? new String[] {} : ctype.split("");
+	}
+	
+	public String[] getPtypeArr() {
+		return ptype==null? new String[] {} : ptype.split("");
 	}
 }
