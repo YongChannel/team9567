@@ -49,4 +49,10 @@ public class CompanyServiceImpl implements CompanyService {
 	public boolean modify(CompanyVO vo) {
 		return (companyMapper.update(vo) == 1);
 	}
+	
+	//회사 정보 개별보기
+	@Override
+	public CompanyVO getRead(String name) {
+		return companyMapper.getRead(name);
+	}
 }

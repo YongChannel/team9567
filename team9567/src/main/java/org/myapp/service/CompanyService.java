@@ -23,4 +23,7 @@ public interface CompanyService {
 	
 	//회사 정보 수정
 	public boolean modify(CompanyVO vo);
+	
+	//회사 정보 개별보기
+	public CompanyVO getRead(String name);
 }

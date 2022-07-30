@@ -34,14 +34,14 @@ public class ContractServiceImpl implements ContractService {
 	
 	//계약 정보 삭제
 	@Override
-	public void remove(Long partCode) {
-		contractMapper.delete(partCode);
+	public void remove(Long contractNo) {
+		contractMapper.delete(contractNo);
 	}
 	
 	//계약 정보 개별보기
 	@Override
-	public ContractVO get(Long partCode) {
-		return contractMapper.read(partCode);
+	public ContractVO get(Long contractNo) {
+		return contractMapper.read(contractNo);
 	}
 	
 	//계약 정보 수정

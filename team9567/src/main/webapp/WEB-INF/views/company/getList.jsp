@@ -6,7 +6,120 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                		<h2 class="page-header"> 회사 정보 등록 / 조회</h2>
+                		<h2 class="page-header"> 회사 정보 수정</h2>
+                    </div>
+                </div>
+                <!-- /.row -->
+                
+                <div class="row">
+                	<div class="col-lg-12">
+						<form action="/company/modify" method="post">
+							<div class="col-lg-2" style="float:right">
+								<button type="submit" class="btn btn-info">수정</button>
+								<button type="button" class="btn btn-warning" style="float:right" 
+									onclick="location.href='/company/companyList?pageNum=${criteria.pageNum}&amount=${criteria.amount}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}'">취소</button>
+							</div><br><br>
+							
+							<input type="hidden" name="Code" value="${get.code}">
+							<input type="hidden" value="${criteria.pageNum}" name="pageNum">
+							<input type="hidden" value="${criteria.amount}" name="amount">
+							<input type="hidden" value="${criteria.type}" name="type">
+							<input type="hidden" value="${criteria.keyword}" name="keyword">
+							
+							<div class="table-responsive" style="width:100%">
+		                        <table class="table table-bordered table-hover table-striped">
+		                        	<tbody>
+		                                <tr>
+		                                	<th class="text-center" style="width:7%">업체명</th>
+		                                	<td><input type="text" class="form-control input-sm" name="Name" value="${get.name}"></td>
+		                                	
+		                                    <th class="text-center" style="width:7%">사업자번호</th>
+		                                    <td><input type="text" class="form-control input-sm" name="Business_Number" value="${get.business_Number}"></td>
+		                                    
+		                                    <th class="text-center" style="width:7%">세무코드</th>
+		                                    <td><input type="text" class="form-control input-sm" name="Taxcode" value="${get.taxcode}"></td>
+
+		                                    <th class="text-center" style="width:7%">대표자</th>
+		                                    <td><input type="text" class="form-control input-sm" name="Owner" value="${get.owner}"></td>
+		                                    
+		                                    <th class="text-center" style="width:7%">연락처</th>
+		                                    <td><input type="text" class="form-control input-sm" name="Contact" value="${get.contact}"></td>
+		                                    
+		                                    <th class="text-center" style="width:7%">회사정보</th>
+		                                    <td><input type="text" class="form-control input-sm" name="Address" value="${get.address}"></td>
+										</tr>
+		                                
+		                                <tr>
+		                                	<th class="text-center" style="width:7%">계좌정보</th>
+		                                    <td><input type="text" class="form-control input-sm" name="Account" value="${get.account}"></td>
+		                                	
+		                                	<th class="text-center" style="width:7%">업체규모</th>
+		                                	<td><select id="Select1" class="form-control input-sm" name="Company_Size">
+		                                			<option>선택해주세요.</option>
+		                            				<option value="대기업" <c:if test="${get.company_Size == '대기업'}"> selected</c:if>>대기업</option>
+		                            				<option value="중소기업" <c:if test="${get.company_Size == '중소기업'}"> selected</c:if>>중소기업</option>
+		                        				</select></td>
+		                                	
+											<th class="text-center" style="width:7%">업태분류</th>
+		                                	<td><select id="Select2" class="form-control input-sm" name="Category">
+		                                			<option>선택해주세요.</option>
+		                            				<option value="도매" <c:if test="${get.category == '도매'}"> selected</c:if>>도매</option>
+		                            				<option value="소매" <c:if test="${get.category == '소매'}"> selected</c:if>>소매</option>
+		                        				</select></td>
+		                                	
+		                                	<th class="text-center" style="width:7%">매출액</th>
+		                                    <td><input type="text" class="form-control input-sm" name="Sales" value="${get.sales}"></td>
+		                                	
+		                                	<th class="text-center" style="width:7%">거래형태</th>
+		                                    <td><input type="text" class="form-control input-sm" name="Deal_Type" value="${get.deal_Type}"></td>
+		                                	
+		                                	<th class="text-center" style="width:7%">내외자구분</th>
+		                                	<td><select id="Select3" class="form-control input-sm" name="Domestic_Foreign">
+		                                			<option>선택해주세요.</option>
+		                            				<option value="국내" <c:if test="${get.domestic_Foreign == '국내'}"> selected</c:if>>국내</option>
+		                            				<option value="해외" <c:if test="${get.domestic_Foreign == '해외'}"> selected</c:if>>해외</option>
+		                        				</select></td>
+		                        		</tr>
+		                        		
+		                        		<tr>
+		                                	<th class="text-center" style="width:7%">결제통화</th>
+		                                	<td><select id="Select4" class="form-control input-sm" name="Currency">
+		                                			<option>선택해주세요.</option>
+		                            				<option value="usd" <c:if test="${get.currency == 'usd'}"> selected</c:if>>usd</option>
+		                            				<option value="krw" <c:if test="${get.currency == 'krw'}"> selected</c:if>>krw</option>
+		                        				</select></td>
+		                                	
+		                                	<th class="text-center" style="width:7%">거래개시일</th>
+		                        			<td><input type="date" class="form-control input-sm" name="Start_Date" value='<fmt:formatDate pattern="yyyy-MM-dd" value="${get.start_Date}" />' /></td>
+		                        			
+											<th class="text-center" style="width:7%">거래종료일</th>
+											<td><input type="date" class="form-control input-sm" name="End_Date" value='<fmt:formatDate pattern="yyyy-MM-dd" value="${get.end_Date}" />' /></td>	
+		                                	
+		                                	<th class="text-center" style="width:7%">계산서발행</th>
+		                                	<td><select id="Select5" class="form-control input-sm" name="Invoice_Issue">
+		                                			<option>선택해주세요.</option>
+		                            				<option value="발행" <c:if test="${get.invoice_Issue == '발행'}"> selected</c:if>>발행</option>
+		                            				<option value="미발행" <c:if test="${get.invoice_Issue == '미발행'}"> selected</c:if>>미발행</option>
+		                        				</select></td>
+		                                	
+		                                    <th class="text-center" style="width:7%">담당자</th>
+		                                    <td><input type="text" class="form-control input-sm" name="Comemployee" value="${get.comemployee}"></td>
+											
+											<th class="text-center" style="width:7%">이메일</th>
+		                                    <td><input type="text" class="form-control input-sm" name="Comemail" value="${get.comemail}"></td>
+		                                </tr>
+		                            </tbody>
+		                        </table>
+		                    </div>
+		                    <!-- /.table-responsive -->
+						</form>
+					</div>
+				</div>
+                <!-- /.row -->
+				
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h3 class="page-header">회사 정보 리스트</h3>
                     </div>
                 </div>
                 <!-- /.row -->
@@ -35,133 +148,31 @@
                 <!-- /.row -->
                 
                 <div class="row">
-                	<div class="col-lg-12">
-						<form action="/company/modify" method="post">
-							<div class="col-lg-2" style="float:right">
-								<button type="submit" class="btn btn-info">수정</button>
-								<button type="button" class="btn btn-warning" style="float:right" 
-									onclick="location.href='/company/companyList?pageNum=${criteria.pageNum}&amount=${criteria.amount}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}'">취소</button>
-							</div><br><br>
-							
-							<input type="hidden" name="Code" value="${get.code}">
-							<input type="hidden" value="${criteria.pageNum}" name="pageNum">
-							<input type="hidden" value="${criteria.amount}" name="amount">
-							<input type="hidden" value="${criteria.type}" name="type">
-							<input type="hidden" value="${criteria.keyword}" name="keyword">
-							
-							<div class="table-responsive" style="width:100%">
-		                        <table class="table table-bordered table-hover table-striped">
-		                        	<tbody>
-		                                <tr>
-		                                	<th class="text-center">업체명</th>
-		                                	<td><input type="text" class="form-control input-sm" name="Name" value="${get.name}"></td>
-		                                	
-		                                    <th class="text-center">사업자번호</th>
-		                                    <td><input type="text" class="form-control input-sm" name="Business_Number" value="${get.business_Number}"></td>
-		                                    
-		                                    <th class="text-center">세무코드</th>
-		                                    <td><input type="text" class="form-control input-sm" name="Taxcode" value="${get.taxcode}"></td>
-
-		                                    <th class="text-center">대표자</th>
-		                                    <td><input type="text" class="form-control input-sm" name="Owner" value="${get.owner}"></td>
-		                                    
-		                                    <th class="text-center">연락처</th>
-		                                    <td><input type="text" class="form-control input-sm" name="Contact" value="${get.contact}"></td>
-		                                    
-		                                    <th class="text-center">회사정보</th>
-		                                    <td><input type="text" class="form-control input-sm" name="Address" value="${get.address}"></td>
-										</tr>
-		                                
-		                                <tr>
-		                                	<th class="text-center">계좌정보</th>
-		                                    <td><input type="text" class="form-control input-sm" name="Account" value="${get.account}"></td>
-		                                	
-		                                	<th class="text-center">업체규모</th>
-		                                	<td><select id="Select1" class="form-control input-sm" name="Company_Size">
-		                            				<option value="대기업" <c:if test="${get.company_Size == '대기업'}"> selected</c:if>>대기업</option>
-		                            				<option value="중소기업" <c:if test="${get.company_Size == '중소기업'}"> selected</c:if>>중소기업</option>
-		                        				</select></td>
-		                                	
-											<th class="text-center">업태분류</th>
-		                                	<td><select id="Select2" class="form-control input-sm" name="Category">
-		                            				<option value="도매" <c:if test="${get.category == '도매'}"> selected</c:if>>도매</option>
-		                            				<option value="소매" <c:if test="${get.category == '소매'}"> selected</c:if>>소매</option>
-		                        				</select></td>
-		                                	
-		                                	<th class="text-center">매출액</th>
-		                                    <td><input type="text" class="form-control input-sm" name="Sales" value="${get.sales}"></td>
-		                                	
-		                                	<th class="text-center">거래형태</th>
-		                                    <td><input type="text" class="form-control input-sm" name="Deal_Type" value="${get.deal_Type}"></td>
-		                                	
-		                                	<th class="text-center">내외자구분</th>
-		                                	<td><select id="Select3" class="form-control input-sm" name="Domestic_Foreign">
-		                            				<option value="국내" <c:if test="${get.domestic_Foreign == '국내'}"> selected</c:if>>국내</option>
-		                            				<option value="해외" <c:if test="${get.domestic_Foreign == '해외'}"> selected</c:if>>해외</option>
-		                        				</select></td>
-		                        		</tr>
-		                        		
-		                        		<tr>
-		                                	<th class="text-center">결제통화</th>
-		                                	<td><select id="Select4" class="form-control input-sm" name="Currency">
-		                            				<option value="달러" <c:if test="${get.currency == '달러'}"> selected</c:if>>달러</option>
-		                            				<option value="원" <c:if test="${get.currency == '원'}"> selected</c:if>>원</option>
-		                        				</select></td>
-		                                	
-		                                	<th class="text-center">거래개시일</th>
-		                        			<td><input type="date" class="form-control input-sm" name="Start_Date" value="${get.start_Date}"></td>
-		                        			
-											<th class="text-center">거래종료일</th>
-											<td><input type="date" class="form-control input-sm" name="End_Date" value="${get.end_Date}"></td>	
-		                                	
-		                                	<th class="text-center">계산서발행</th>
-		                                	<td><select id="Select5" class="form-control input-sm" name="Invoice_Issue">
-		                            				<option value="발행" <c:if test="${get.invoice_Issue == '발행'}"> selected</c:if>>발행</option>
-		                            				<option value="미발행" <c:if test="${get.invoice_Issue == '미발행'}"> selected</c:if>>미발행</option>
-		                        				</select></td>
-		                                	
-		                                	<td colspan="4"></td>
-		                                </tr>
-		                            </tbody>
-		                        </table>
-		                    </div>
-		                    <!-- /.table-responsive -->
-						</form>
-					</div>
-				</div>
-                <!-- /.row -->
-				
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h3 class="page-header">회사 정보 리스트</h3>
-                    </div>
-                </div>
-                <!-- /.row -->
-                
-                <div class="row">
 	                <div class="col-lg-12">
 	                    <div class="table-responsive">
 	                        <table class="table table-striped table-bordered table-hover" id="dataTables-example">
 	                        	<thead>
 	                                <tr>
-	                                	<th class="text-center"><input type="checkbox"></th>
-	                                	<th class="text-center">업체코드</th>
-	                                    <th class="text-center">업체명</th>
-	                                    <th class="text-center">사업자번호</th>
-	                                    <th class="text-center">세무코드</th>
-	                                    <th class="text-center">대표자</th>
-	                                    <th class="text-center">연락처</th>
-	                                    <th class="text-center">회사정보</th>
-	                                    <th class="text-center">계좌정보</th>
-	                                    <th class="text-center">업체규모</th>
-	                                    <th class="text-center">업태분류</th>
-	                                    <th class="text-center">매출액</th>
-	                                    <th class="text-center">거래형태</th>
-	                                    <th class="text-center">내외자구분</th>
-	                                    <th class="text-center">결제통화</th>
-	                                    <th class="text-center">거래개시일</th>
-	                                    <th class="text-center">거래종료일</th>
-	                                    <th class="text-center">계산서발행</th>
+	                                	<th class="text-center" style="width:5%"><input type="checkbox" name="checkAll" id="checkAll"></th>
+	                                	<th class="text-center" style="width:5%">업체<br>코드</th>
+	                                    <th class="text-center" style="width:5%">업체명</th>
+	                                    <th class="text-center" style="width:5%">사업자<br>번호</th>
+	                                    <th class="text-center" style="width:5%">세무<br>코드</th>
+	                                    <th class="text-center" style="width:5%">대표자</th>
+	                                    <th class="text-center" style="width:5%">연락처</th>
+	                                    <th class="text-center" style="width:5%">회사<br>정보</th>
+	                                    <th class="text-center" style="width:5%">계좌<br>정보</th>
+	                                    <th class="text-center" style="width:5%">업체<br>규모</th>
+	                                    <th class="text-center" style="width:5%">업태<br>분류</th>
+	                                    <th class="text-center" style="width:5%">매출액</th>
+	                                    <th class="text-center" style="width:5%">거래<br>형태</th>
+	                                    <th class="text-center" style="width:5%">내외자<br>구분</th>
+	                                    <th class="text-center" style="width:5%">결제<br>통화</th>
+	                                    <th class="text-center" style="width:5%">거래<br>개시일</th>
+	                                    <th class="text-center" style="width:5%">거래<br>종료일</th>
+	                                    <th class="text-center" style="width:5%">계산서<br>발행</th>
+	                                    <th class="text-center" style="width:5%">담당자</th>
+	                                    <th class="text-center" style="width:5%">이메일</th>
 	                                </tr>
 	                            </thead>
 	                            
@@ -198,11 +209,15 @@
 		                                    
 		                                    <td>${company.currency}</td>
 		                                    
-		                                    <td>${company.start_Date}</td>
+		                                    <td><fmt:formatDate pattern="yyyy-MM-dd" value="${company.start_Date}" /></td>
 		                                    
-		                                    <td>${company.end_Date}</td>
+		                                    <td><fmt:formatDate pattern="yyyy-MM-dd" value="${company.end_Date}" /></td>
 		                                    
 		                                    <td>${company.invoice_Issue}</td>
+		                                    
+		                                    <td>${company.comemployee}</td>
+		                                    
+		                                    <td>${company.comemail}</td>
 		                                </tr>
 		                            </c:forEach>
 	                         	</tbody>

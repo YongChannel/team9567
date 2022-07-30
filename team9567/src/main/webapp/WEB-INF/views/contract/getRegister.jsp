@@ -5,7 +5,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                		<h2 class="page-header"> 계약 정보 등록 / 조회</h2>
+                		<h2 class="page-header"> 계약 정보 등록</h2>
                     </div>
                 </div>
                 <!-- /.row -->
@@ -52,7 +52,6 @@
 	                    <!-- /.panel -->
 	                </div>
 	                <!-- /.col-lg-6 -->
-	                
 					
 	                <div class="col-lg-6">
 	                    <div class="panel panel-default">
@@ -63,10 +62,13 @@
 	                        
 	                        <div class="panel-body">
 	                        	<form action="/contract/getRegister" method="get">
+	                        		<input type="hidden" class="form-control input-sm" name="ptype" value="${pageMaker.cri.ptype}">
+									<input type="hidden" class="form-control input-sm" name="pkeyword" value="${pageMaker.cri.pkeyword}">
+									
 		                        	<div class="col-lg-2">
 				                    	<div class="form-group">
 				                    		<select id="Select1" class="form-control input-sm" name="ctype">
-					                            <option ${pageMaker.cri.ctype == "C"? "selected" : ""} value="C">업체코드</option>
+					                            <option ${pageMaker.cri.ctype == "W"? "selected" : ""} value="W">업체명</option>
 				                        	</select>
 				                   		</div>
 			                   		</div>
@@ -113,22 +115,44 @@
 	                </div>
 	                <!-- /.col-lg-6 -->
 	                
-	                <form action="/contract/register" method="post">
-					    <div class="col-lg-12">
-							<div class="panel panel-default">
-	            				<div class="panel-heading">
-									<b>항목별 세부사항</b>
-								</div>
-								<!-- /.panel-heading -->
+				    <div class="col-lg-12">
+						<div class="panel panel-default">
+            				<div class="panel-heading">
+								<b>항목별 세부사항</b>
+							</div><br>
+							<!-- /.panel-heading -->
+							
+							<form action="/contract/getRegister" method="get">
+								<input type="hidden" class="form-control input-sm" name="ctype" value="${pageMaker.cri.ctype}">
+								<input type="hidden" class="form-control input-sm" name="ckeyword" value="${pageMaker.cri.ckeyword}">
 								
-								<input type="hidden" name="Code" value="${criteria.ckeyword}">
+	                        	<div class="col-lg-1">
+			                    	<div class="form-group">
+			                    		<select id="Select2" class="form-control input-sm" name="ptype">
+				                            <option ${pageMaker.cri.ptype == "W"? "selected" : ""} value="W">품목명</option>
+			                        	</select>
+			                   		</div>
+		                   		</div>
+                   		
+		                   		<div class="col-lg-2">
+		                   			<div class="form-group">
+										<input type="text" class="form-control input-sm" name="pkeyword" value="${pageMaker.cri.pkeyword}">
+									</div>
+								</div>
+		                   		<button class="btn btn-default btn-sm" type="submit"><i class="fa fa-search"></i></button><br>
+							</form>
+							
+							<form action="/contract/register" method="post">
+								<input type="hidden" name="Code" value="${getCom.code}">
+								<input type="hidden" name="Name" value="${criteria.ckeyword}">
+								
 								<div class="panel-body">
 									<div class="table-responsive">
 						                <table class="table table-striped table-bordered table-hover">
 						                	<tbody>
 						                        <tr>
 						                            <th class="text-center" style="width:10%">품목코드</th>
-						                            <td><input type="text" class="form-control input-sm" name="PartCode"></td>
+						                            <td><input type="text" class="form-control input-sm" name="PartCode" value="${getPat.partCode}" readonly></td>
 						                            
 						                            <th class="text-center" style="width:10%">부품공급 L/T</th>
 						                            <td><input type="text" class="form-control input-sm" name="PartsSupply"></td>
@@ -147,27 +171,26 @@
 						            <!-- /.table-responsive -->
 						        </div>
 						        <!-- /.panel-body -->
-							    
-						    </div>
-						    <!-- /.panel -->
-						</div>
-						<!-- /.col-lg-12 -->
-					
-						<div class="col-lg-2" style="float:right">
-							<button type="submit" class="btn btn-success">계약</button>
-							<button type="button" class="btn btn-warning" style="float:right" onclick="location.href='/contract/contractList?&pageNum=${pageMaker.cri.pageNum}&amount=${pageMaker.cri.amount}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}'">취소</button>
-						</div>
-					</form>
+						        
+								<div class="col-lg-2" style="float:right">
+									<br>
+									<button type="submit" class="btn btn-success">계약</button>
+									<button type="button" class="btn btn-warning" style="float:right" onclick="location.href='/contract/contractList?&pageNum=${pageMaker.cri.pageNum}&amount=${pageMaker.cri.amount}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}'">취소</button>
+								</div>
+						    </form>
+					    </div>
+					    <!-- /.panel -->
+					</div>
+					<!-- /.col-lg-12 -->
 				</div>
 				<!-- /.row -->
-                
+				
 			</div>
             <!-- /.container-fluid -->
         </div>
         <!-- /#page-wrapper -->
     </div>
     <!-- /#wrapper -->
-	
 	
 	
 	<!-- jQuery -->

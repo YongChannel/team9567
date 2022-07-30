@@ -47,10 +47,12 @@ public class CompanyController {
 	@PostMapping("/remove")
 	public String remove(HttpServletRequest request, Criteria cri) {
 		String[] ajaxMsg = request.getParameterValues("valueArr");
+		
 		int size = ajaxMsg.length;
 		for(int i = 0; i < size; i++) {
 			companyService.remove(Long.parseLong(ajaxMsg[i]));
 		}
+		
 		return "redirect:/company/companyList?pageNum="+cri.getPageNum()+"&amount="+cri.getAmount()+"&type="+cri.getType()+"&keyword="+cri.getKeyword();
 	}
 	
@@ -68,6 +70,7 @@ public class CompanyController {
 		if(companyService.modify(vo)) {
 			rttr.addFlashAttribute("state", "modify");
 		}
+		
 		return "redirect:/company/companyList?pageNum="+cri.getPageNum()+"&amount="+cri.getAmount()+"&type="+cri.getType()+"&keyword="+cri.getKeyword();
 	}
 }
