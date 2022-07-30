@@ -79,7 +79,7 @@ public class ContractController {
 		return "redirect:/contract/contractList?pageNum="+cri.getPageNum()+"&amount="+cri.getAmount()+"&type="+cri.getType()+"&keyword="+cri.getKeyword();
 	}
 	
-	//
+	//계약 정보 개별보기
 	@GetMapping("/getRegister")
 	public void getRegister(String ckeyword, String pkeyword, Model model, Criteria cri) {
 		model.addAttribute("getReg", companyService.get(0L));

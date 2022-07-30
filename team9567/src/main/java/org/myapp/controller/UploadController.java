@@ -21,6 +21,7 @@ public class UploadController {
 	@ResponseBody
 	public ResponseEntity<Resource> downloadFile(String fileName, String uuid, String uploadPath) {
 		Resource resource = new FileSystemResource("C:\\upload\\"+uploadPath.replaceAll("[-]", "\\\\")+"\\"+uuid+"_"+fileName);
+		/* Resource resource = new FileSystemResource("/upload/"+uploadPath.replaceAll("[-]", "/")+"/"+uuid+"_"+fileName); */
 		
 		String resourceName = resource.getFilename();
 		
