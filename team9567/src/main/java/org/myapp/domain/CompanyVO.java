@@ -1,6 +1,8 @@
 package org.myapp.domain;
 
-import java.sql.Date;
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,7 +26,12 @@ public class CompanyVO {
 	private String Deal_Type; //거래형태
 	private String Domestic_Foreign; //내외자
 	private String Currency; //결제통화
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date Start_Date; //거래개시일
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date End_Date; //거래종료일
 	private String Invoice_Issue; //계산서발행
+	private String Comemployee; //담당자
+	private String Comemail; //이메일
+	private Date CompanyDate; //등록일
 }

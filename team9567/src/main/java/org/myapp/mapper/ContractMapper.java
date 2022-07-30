@@ -16,10 +16,10 @@ public interface ContractMapper {
 	public Long count(Criteria cri);
 	
 	//계약 정보 삭제
-	public void delete(Long partCode);
+	public void delete(Long contractNo);
 	
 	//계약 정보 개별보기
-	public ContractVO read(Long partCode);
+	public ContractVO read(Long contractNo);
 	
 	//계약 정보 수정
 	public int update(ContractVO vo);

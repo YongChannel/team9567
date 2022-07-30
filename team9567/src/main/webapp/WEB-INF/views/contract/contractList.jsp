@@ -5,17 +5,17 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                		<h2 class="page-header"> 계약 정보 등록 / 조회</h2>
+                		<h2 class="page-header"> 계약 정보 등록</h2>
                     </div>
                 </div>
                 <!-- /.row -->
                 
                 <div class="row">
-                	<div class="col-lg-6">
-                	    <form action="/contract/contractList" method="get">
-	                    	<div class="col-lg-2">
+                	<div class="col-lg-12">
+                		<form action="/contract/contractList" method="get">
+	                    	<div class="col-lg-1">
 		                    	<div class="form-group">
-		                    		<select id="Select" class="form-control input-sm" name="type">
+		                    		<select id="Select1" class="form-control input-sm" name="type">
 			                            <option ${pageMaker.cri.type == "C"? "selected" : ""} value="C">계약코드</option>
 			                            <option ${pageMaker.cri.type == "W"? "selected" : ""} value="W">업체명</option>
 			                            <option ${pageMaker.cri.type == "R"? "selected" : ""} value="R">품목명</option>
@@ -23,19 +23,14 @@
 		                   		</div>
 	                   		</div>
 	                   		
-	                   		<div class="col-lg-4">
+	                   		<div class="col-lg-2">
 	                   			<div class="form-group">
 									<input type="text" class="form-control input-sm" name="keyword" value="${pageMaker.cri.keyword}">
 								</div>
 							</div>
 	                   		<button class="btn btn-default btn-sm" type="submit"><i class="fa fa-search"></i></button>
 	                   	</form>
-                   	</div>
-                </div>
-                <!-- /.row -->
-                
-                <div class="row">
-                	<div class="col-lg-12">
+                		
 						<div class="col-lg-2" style="float:right">
 							<button type="button" class="btn btn-success" onclick="location.href='/contract/getRegister?&pageNum=${pageMaker.cri.pageNum}&amount=${pageMaker.cri.amount}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}'">등록</button>
 							<button type="button" class="btn btn-warning" style="float:right" onclick="deleteValue();">삭제</button>
@@ -45,14 +40,14 @@
 	                        <table class="table table-striped table-bordered table-hover" id="dataTables-example">
 	                        	<thead>
 	                                <tr>
-	                                	<th class="text-center"><input type="checkbox" name="checkAll" id="checkAll"></th>
-	                                	<th class="text-center">계약코드</th>
-	                                    <th class="text-center">업체명</th>
-	                                    <th class="text-center">품목명</th>
-	                                    <th class="text-center">부품공급 L/T</th>
-	                                    <th class="text-center">단가</th>
-	                                    <th class="text-center">양도/양수조건</th>                              
-	                                    <th class="text-center">내용보기</th>
+	                                	<th class="text-center" style="width:5%"><input type="checkbox" name="checkAll" id="checkAll"></th>
+	                                	<th class="text-center" style="width:10%">계약코드</th>
+	                                    <th class="text-center" style="width:15%">업체명</th>
+	                                    <th class="text-center" style="width:15%">품목명</th>
+	                                    <th class="text-center" style="width:10%">부품공급 L/T</th>
+	                                    <th class="text-center" style="width:10%">단가</th>
+	                                    <th class="text-center" style="width:25%">양도/양수조건</th>                              
+	                                    <th class="text-center" style="width:10%">내용보기</th>
 	                                </tr>
 	                            </thead>
 	                            
@@ -67,7 +62,7 @@
 		                                    
 		                                    <td>${contract.partName}(${contract.partCode})</td>
 		                                    
-		                                    <td>${contract.partsSupply}</td>
+		                                    <td>${contract.partsSupply}일</td>
 		                                    
 		                                    <td>${contract.unitPrice}</td>
 		                                    
@@ -179,7 +174,6 @@
 			}
 		}
 	</script>
-	
 	
 	
 	<!-- jQuery -->

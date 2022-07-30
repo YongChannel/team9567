@@ -16,9 +16,8 @@ public class ContractVO {
 	private Long UnitPrice; //단가
 	private Date ContractDate; //계약날짜
 	
-	private Long PartCode; //품목코드
+	private String PartCode; //품목코드
 	private String PartName; //품목명
-	
 	private Long Code; //업체코드
 	private String Name; //업체명
 }

@@ -16,10 +16,10 @@ public interface ContractService {
 	public void register(ContractVO vo);
 	
 	//계약 정보 삭제
-	public void remove(Long partCode);
+	public void remove(Long contractNo);
 	
 	//계약 정보 개별보기
-	public ContractVO get(Long partCode);
+	public ContractVO get(Long contractNo);
 	
 	//계약 정보 수정
 	public boolean modify(ContractVO vo);

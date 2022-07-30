@@ -65,7 +65,7 @@
 	            <div class="col-lg-12">
 	                <p class="text-left"><b>계약 번호: </b>제  ${get.contractNo}호</p>
 					<p class="text-left"><b>품&nbsp;&nbsp;목&nbsp;&nbsp;명: </b> ${get.partName}(${get.partCode})</p>
-					<p class="text-left"><b>부품 공급 L/T: </b> ${get.partsSupply}</p>
+					<p class="text-left"><b>부품 공급 L/T: </b> ${get.partsSupply}일</p>
 					<p class="text-left"><b>단&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;가: </b>${get.unitPrice}</p>
 					<p class="text-left"><b>양도/양수조건: </b> ${get.transferConditions}</p>
 					<p class="text-left"><b>기타 사항: </b></p>
