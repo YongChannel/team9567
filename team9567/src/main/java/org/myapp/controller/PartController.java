@@ -62,6 +62,7 @@ public class PartController {
 		
 		List<AttachFileDTO> list = new ArrayList<>();
 		String uploadFolder = "C:\\upload";
+		/* String uploadFolder = "/upload"; */
 		
 		String uploadFolderPath = getFolder();
 		File uploadPath = new File(uploadFolder, uploadFolderPath);
@@ -77,6 +78,7 @@ public class PartController {
 			
 			if(!uploadFileName.equals("")) {
 				uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1);
+				/* uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("/") + 1); */
 				
 				attachDTO.setFileName(uploadFileName);
 				
@@ -117,6 +119,7 @@ public class PartController {
 			for(AttachFileDTO dto :list) {
 				String deleteFile;
 				deleteFile="C:\\upload\\"+dto.getUploadPath()+"\\"+dto.getUuid()+"_"+dto.getFileName();
+				/* deleteFile="/upload/"+dto.getUploadPath()+"/"+dto.getUuid()+"_"+dto.getFileName(); */
 				
 				File file = new File(deleteFile);
 				
